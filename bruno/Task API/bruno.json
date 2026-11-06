@@ -1,0 +1,12 @@
+{
+  "version": "1",
+  "name": "Task API - Week 5",
+  "type": "collection",
+  "presets": {
+    "defaultEnvironment": "Local"
+  },
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

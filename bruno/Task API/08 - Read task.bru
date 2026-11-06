@@ -1,0 +1,22 @@
+meta {
+  name: Read task
+  type: http
+  seq: 8
+}
+
+get {
+  url: {{taskApiUrl}}/tasks/{{taskId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+tests {
+  test('Read task', function () {
+    expect(res.getStatus()).to.equal(200);
+
+  });
+}

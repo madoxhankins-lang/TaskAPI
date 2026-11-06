@@ -1,0 +1,22 @@
+meta {
+  name: Other user read - 404
+  type: http
+  seq: 15
+}
+
+get {
+  url: {{taskApiUrl}}/tasks/{{taskId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{otherToken}}
+}
+
+tests {
+  test('Other user read - 404', function () {
+    expect(res.getStatus()).to.equal(404);
+
+  });
+}

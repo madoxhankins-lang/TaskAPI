@@ -1,0 +1,32 @@
+meta {
+  name: Other user update - 404
+  type: http
+  seq: 16
+}
+
+put {
+  url: {{taskApiUrl}}/tasks/{{taskId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{otherToken}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "status": "TODO"
+  }
+}
+
+tests {
+  test('Other user update - 404', function () {
+    expect(res.getStatus()).to.equal(404);
+
+  });
+}

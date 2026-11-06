@@ -1,0 +1,29 @@
+meta {
+  name: Login ADMIN
+  type: http
+  seq: 19
+}
+
+post {
+  url: {{taskApiUrl}}/auth/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{adminEmail}}",
+    "password": "{{adminPassword}}"
+  }
+}
+
+tests {
+  test('Login ADMIN', function () {
+    expect(res.getStatus()).to.equal(200);
+    bru.setEnvVar('adminToken', res.getBody().data.accessToken);
+  });
+}

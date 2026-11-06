@@ -1,0 +1,18 @@
+meta {
+  name: No token - 401
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{taskApiUrl}}/tasks
+  body: none
+  auth: none
+}
+
+tests {
+  test('No token - 401', function () {
+    expect(res.getStatus()).to.equal(401);
+
+  });
+}

@@ -1,0 +1,22 @@
+meta {
+  name: USER admin route - 403
+  type: http
+  seq: 18
+}
+
+get {
+  url: {{taskApiUrl}}/admin/users
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+tests {
+  test('USER admin route - 403', function () {
+    expect(res.getStatus()).to.equal(403);
+
+  });
+}

@@ -1,0 +1,32 @@
+meta {
+  name: Invalid task - 400
+  type: http
+  seq: 21
+}
+
+post {
+  url: {{taskApiUrl}}/tasks
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": " "
+  }
+}
+
+tests {
+  test('Invalid task - 400', function () {
+    expect(res.getStatus()).to.equal(400);
+
+  });
+}

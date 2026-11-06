@@ -1,0 +1,19 @@
+meta {
+  name: Database and Redis ready
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{taskApiUrl}}/ready
+  body: none
+  auth: none
+}
+
+tests {
+  test('Database and Redis ready', function () {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().data.database).to.equal('connected');
+    expect(res.getBody().data.redis).to.equal('connected');
+  });
+}

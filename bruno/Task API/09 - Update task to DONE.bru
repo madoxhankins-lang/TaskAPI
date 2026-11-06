@@ -1,0 +1,32 @@
+meta {
+  name: Update task to DONE
+  type: http
+  seq: 9
+}
+
+put {
+  url: {{taskApiUrl}}/tasks/{{taskId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "status": "DONE"
+  }
+}
+
+tests {
+  test('Update task to DONE', function () {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getBody().data.task.status).to.equal('DONE');
+  });
+}

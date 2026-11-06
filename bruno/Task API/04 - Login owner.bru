@@ -1,0 +1,29 @@
+meta {
+  name: Login owner
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{taskApiUrl}}/auth/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{userEmail}}",
+    "password": "{{demoPassword}}"
+  }
+}
+
+tests {
+  test('Login owner', function () {
+    expect(res.getStatus()).to.equal(200);
+    bru.setEnvVar('userToken', res.getBody().data.accessToken);
+  });
+}

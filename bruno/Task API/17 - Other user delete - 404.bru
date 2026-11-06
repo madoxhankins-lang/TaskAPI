@@ -1,0 +1,22 @@
+meta {
+  name: Other user delete - 404
+  type: http
+  seq: 17
+}
+
+delete {
+  url: {{taskApiUrl}}/tasks/{{taskId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{otherToken}}
+}
+
+tests {
+  test('Other user delete - 404', function () {
+    expect(res.getStatus()).to.equal(404);
+
+  });
+}

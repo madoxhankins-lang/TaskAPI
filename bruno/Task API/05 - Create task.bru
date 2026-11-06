@@ -1,0 +1,34 @@
+meta {
+  name: Create task
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{taskApiUrl}}/tasks
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Finish my Week 5 API",
+    "description": "Explain the files and test in Bruno"
+  }
+}
+
+tests {
+  test('Create task', function () {
+    expect(res.getStatus()).to.equal(201);
+    bru.setEnvVar('taskId', res.getBody().data.task.id);
+    expect(res.getBody().data.task.status).to.equal('TODO');
+  });
+}

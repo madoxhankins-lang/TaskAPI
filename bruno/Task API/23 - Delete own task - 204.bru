@@ -1,0 +1,22 @@
+meta {
+  name: Delete own task - 204
+  type: http
+  seq: 23
+}
+
+delete {
+  url: {{taskApiUrl}}/tasks/{{taskId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+tests {
+  test('Delete own task - 204', function () {
+    expect(res.getStatus()).to.equal(204);
+
+  });
+}

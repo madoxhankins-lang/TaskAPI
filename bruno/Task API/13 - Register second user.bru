@@ -1,0 +1,33 @@
+meta {
+  name: Register second user
+  type: http
+  seq: 13
+}
+
+post {
+  url: {{taskApiUrl}}/auth/register
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{otherEmail}}",
+    "password": "{{demoPassword}}"
+  }
+}
+
+script:pre-request {
+  bru.setEnvVar('otherEmail', 'bruno-other-' + Date.now() + '-' + Math.random().toString(36).slice(2,8) + '@example.com');
+}
+
+tests {
+  test('Register second user', function () {
+    expect(res.getStatus()).to.equal(201);
+
+  });
+}

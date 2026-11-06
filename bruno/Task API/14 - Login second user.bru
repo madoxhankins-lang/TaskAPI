@@ -1,0 +1,29 @@
+meta {
+  name: Login second user
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{taskApiUrl}}/auth/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{otherEmail}}",
+    "password": "{{demoPassword}}"
+  }
+}
+
+tests {
+  test('Login second user', function () {
+    expect(res.getStatus()).to.equal(200);
+    bru.setEnvVar('otherToken', res.getBody().data.accessToken);
+  });
+}

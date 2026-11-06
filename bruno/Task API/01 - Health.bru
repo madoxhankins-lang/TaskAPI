@@ -1,0 +1,19 @@
+meta {
+  name: Health
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{taskApiUrl}}/health
+  body: none
+  auth: none
+}
+
+tests {
+  test('Health', function () {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getHeader('content-type'), 'Health must return API JSON, not a frontend HTML page').to.include('application/json');
+    expect(res.getBody().data.status).to.equal('ok');
+  });
+}

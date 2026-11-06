@@ -1,0 +1,23 @@
+meta {
+  name: Fresh list after delete - MISS
+  type: http
+  seq: 24
+}
+
+get {
+  url: {{taskApiUrl}}/tasks
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+tests {
+  test('Fresh list after delete - MISS', function () {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getHeader('x-cache')).to.equal('MISS');
+    expect(res.getBody().data.tasks.some(t => t.id === bru.getEnvVar('taskId'))).to.equal(false);
+  });
+}

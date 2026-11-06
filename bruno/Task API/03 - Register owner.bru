@@ -1,0 +1,34 @@
+meta {
+  name: Register owner
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{taskApiUrl}}/auth/register
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{userEmail}}",
+    "password": "{{demoPassword}}"
+  }
+}
+
+script:pre-request {
+  bru.setEnvVar('userEmail', 'bruno-' + Date.now() + '-' + Math.random().toString(36).slice(2,8) + '@example.com');
+}
+
+tests {
+  test('Register owner', function () {
+    expect(res.getStatus()).to.equal(201);
+    expect(res.getBody().data.user.role).to.equal('USER');
+    expect(res.getBody().data.user).not.to.have.property('passwordHash');
+  });
+}

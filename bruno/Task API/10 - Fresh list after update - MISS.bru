@@ -1,0 +1,23 @@
+meta {
+  name: Fresh list after update - MISS
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{taskApiUrl}}/tasks
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+tests {
+  test('Fresh list after update - MISS', function () {
+    expect(res.getStatus()).to.equal(200);
+    expect(res.getHeader('x-cache')).to.equal('MISS');
+    expect(res.getBody().data.tasks.find(t => t.id === bru.getEnvVar('taskId')).status).to.equal('DONE');
+  });
+}

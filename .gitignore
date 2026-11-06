@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+.env
+logs/
+*.log
+.DS_Store
+bruno/Task API/environments/Local.bru

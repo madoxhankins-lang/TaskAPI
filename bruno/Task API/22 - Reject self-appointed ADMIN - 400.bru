@@ -1,0 +1,30 @@
+meta {
+  name: Reject self-appointed ADMIN - 400
+  type: http
+  seq: 22
+}
+
+post {
+  url: {{taskApiUrl}}/auth/register
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "bad-role@example.com",
+    "password": "{{demoPassword}}",
+    "role": "ADMIN"
+  }
+}
+
+tests {
+  test('Reject self-appointed ADMIN - 400', function () {
+    expect(res.getStatus()).to.equal(400);
+
+  });
+}

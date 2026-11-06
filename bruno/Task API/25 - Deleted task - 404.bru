@@ -1,0 +1,22 @@
+meta {
+  name: Deleted task - 404
+  type: http
+  seq: 25
+}
+
+get {
+  url: {{taskApiUrl}}/tasks/{{taskId}}
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{userToken}}
+}
+
+tests {
+  test('Deleted task - 404', function () {
+    expect(res.getStatus()).to.equal(404);
+
+  });
+}
